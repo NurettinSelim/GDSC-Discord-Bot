@@ -18,7 +18,8 @@ client.on('interactionCreate', async interaction => {
   const { commandName } = interaction
 
   if (commandName === 'help') {
-    await interaction.reply('Hi, I\'m here for you! :)')
+    await interaction.deferReply() // helps to mention without pinging
+    await interaction.editReply('Merhaba, eğer bir sorun varsa <@267383033533825035>\'e ulaşabilirsin!')
   } else if (commandName === 'addcoremember') {
     const messageAuthor = interaction.member as GuildMember
     const isLead = messageAuthor.roles.cache.some(role => [process.env.FACILITATOR_ID, process.env.LEAD_ID].includes(role.id))
