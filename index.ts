@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, GuildMember, Role } from 'discord.js'
+import { Client, GatewayIntentBits, GuildMember, Role, TextChannel } from 'discord.js'
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -28,6 +28,9 @@ client.on('interactionCreate', async interaction => {
     if (isLead != null) {
       const coreTeamRole = interaction.guild?.roles.cache.find(role => role.id === process.env.CORETEAM_ID) as Role
       await user.roles.add(coreTeamRole)
+      const logChannel = await client.channels.fetch(process.env.LOG_CHANNEL_ID!) as TextChannel
+
+      await logChannel.send(`<@${messageAuthor.id}> tarafından <@${user.id}> kullanıcısına rol verildi.`)
       await interaction.reply(`<@${user.id}> Core Team Member olarak eklendi`)
     } else {
       await interaction.reply('Bu komutu kullanmak için Lead olmanız gerekir')
