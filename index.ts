@@ -26,7 +26,7 @@ client.on('interactionCreate', async interaction => {
 
     const user = interaction.options.getMember('user') as GuildMember
 
-    if (isLead != null) {
+    if (isLead) {
       const coreTeamRole = interaction.guild?.roles.cache.find(role => role.id === process.env.CORETEAM_ID) as Role
       await user.roles.add(coreTeamRole)
       const logChannel = await client.channels.fetch(process.env.LOG_CHANNEL_ID!) as TextChannel
