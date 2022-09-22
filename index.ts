@@ -31,7 +31,7 @@ client.on('interactionCreate', async interaction => {
       await user.roles.add(coreTeamRole)
       const logChannel = await client.channels.fetch(process.env.LOG_CHANNEL_ID!) as TextChannel
 
-      await logChannel.send(`<@${messageAuthor.id}> tarafından <@${user.id}> kullanıcısına *Core Team Member* rolÜ verildi.`)
+      await logChannel.send(`<@${messageAuthor.id}> tarafından <@${user.id}> kullanıcısına **Core Team Member** rolü verildi.`)
       await interaction.reply(`<@${user.id}> Core Team Member olarak eklendi!`)
     } else {
       await interaction.reply('Bu komutu kullanmak için Lead olmanız gerekir!')
@@ -47,7 +47,7 @@ client.on('interactionCreate', async interaction => {
       await user.roles.remove(coreTeamRole)
       const logChannel = await client.channels.fetch(process.env.LOG_CHANNEL_ID!) as TextChannel
 
-      await logChannel.send(`<@${messageAuthor.id}> tarafından <@${user.id}> kullanıcısının *Core Team Member* rolü silindi.`)
+      await logChannel.send(`<@${messageAuthor.id}> tarafından <@${user.id}> kullanıcısının **Core Team Member** rolü silindi.`)
       await interaction.reply(`<@${user.id}> Core Team Member rolü silindi!`)
     } else {
       await interaction.reply('Bu komutu kullanmak için Lead olmanız gerekir!')
