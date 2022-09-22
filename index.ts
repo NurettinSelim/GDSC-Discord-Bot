@@ -31,10 +31,26 @@ client.on('interactionCreate', async interaction => {
       await user.roles.add(coreTeamRole)
       const logChannel = await client.channels.fetch(process.env.LOG_CHANNEL_ID!) as TextChannel
 
-      await logChannel.send(`<@${messageAuthor.id}> tarafından <@${user.id}> kullanıcısına rol verildi.`)
-      await interaction.reply(`<@${user.id}> Core Team Member olarak eklendi`)
+      await logChannel.send(`<@${messageAuthor.id}> tarafından <@${user.id}> kullanıcısına *Core Team Member* rolÜ verildi.`)
+      await interaction.reply(`<@${user.id}> Core Team Member olarak eklendi!`)
     } else {
-      await interaction.reply('Bu komutu kullanmak için Lead olmanız gerekir')
+      await interaction.reply('Bu komutu kullanmak için Lead olmanız gerekir!')
+    }
+  } if (commandName === 'deletecoremember') {
+    const messageAuthor = interaction.member as GuildMember
+    const isLead = messageAuthor.roles.cache.some(role => [process.env.FACILITATOR_ID, process.env.LEAD_ID].includes(role.id))
+
+    const user = interaction.options.getMember('user') as GuildMember
+
+    if (isLead) {
+      const coreTeamRole = interaction.guild?.roles.cache.find(role => role.id === process.env.CORETEAM_ID) as Role
+      await user.roles.remove(coreTeamRole)
+      const logChannel = await client.channels.fetch(process.env.LOG_CHANNEL_ID!) as TextChannel
+
+      await logChannel.send(`<@${messageAuthor.id}> tarafından <@${user.id}> kullanıcısının *Core Team Member* rolü silindi.`)
+      await interaction.reply(`<@${user.id}> Core Team Member rolü silindi!`)
+    } else {
+      await interaction.reply('Bu komutu kullanmak için Lead olmanız gerekir!')
     }
   }
 })

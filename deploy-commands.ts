@@ -7,7 +7,9 @@ dotenv.config()
 const commands = [
   new SlashCommandBuilder().setName('help').setDescription('Helps about bot commands'),
   new SlashCommandBuilder().setName('addcoremember').setDescription('Core Team rolü verir.')
-    .addUserOption(option => option.setName('user').setDescription('Core Team\'e eklemek istediğiniz kullanıcı').setRequired(true))
+    .addUserOption(option => option.setName('user').setDescription('Core Team\'e eklemek istediğiniz kullanıcı').setRequired(true)),
+  new SlashCommandBuilder().setName('deletecoremember').setDescription('Core Team rolünü kaldırır/siler.')
+    .addUserOption(option => option.setName('user').setDescription('Core Team rolünü kaldırmak istediğiniz kullanıcı').setRequired(true))
 ]
   .map(command => command.toJSON())
 
